@@ -1,0 +1,150 @@
+// Student Management System
+
+class Student {
+
+    constructor(id, name, grades, attendance) {
+
+        this.id = id;
+
+        this.name = name;
+
+        this.grades = grades;
+
+        this.attendance = attendance;
+
+    }
+
+    getAverage() {
+
+        return this.grades.reduce((sum, grade) =>
+
+            sum + grade, 0) / this.grades.length;
+
+    }
+
+    getGrade() {
+
+        let avg = this.getAverage();
+
+        if (avg >= 90) return "A";
+
+        else if (avg >= 80) return "B";
+
+        else if (avg >= 70) return "C";
+
+        else if (avg >= 60) return "D";
+
+        else if (avg >= 50) return "E";
+
+        else return "F";
+
+    }
+
+    getResult() {
+
+        return this.getAverage() >= 50 &&
+
+               this.attendance >= 75
+
+            ? "Pass"
+
+            : "Fail";
+
+    }
+
+}
+
+// Students List
+
+const studentsList = [
+
+    new Student(1, "Ahmed", [85, 90, 88], 90),
+
+    new Student(2, "Mona", [95, 92, 96], 95),
+
+    new Student(3, "Sara", [45, 50, 48], 80),
+
+    new Student(4, "Omar", [70, 75, 80], 85)
+
+];
+
+// Filter weak students
+
+const weakStudents = studentsList.filter(
+
+    student => student.getAverage() < 50
+
+);
+
+// Map students data
+
+const studentsData = studentsList.map(student => ({
+
+    name: student.name,
+
+    average: student.getAverage(),
+
+    grade: student.getGrade()
+
+}));
+
+// Calculate total average
+
+const totalAverage = studentsList.reduce(
+
+    (sum, student) => sum + student.getAverage(), 0
+
+);
+
+const finalAverage = totalAverage / studentsList.length;
+
+// Print Report
+
+console.log("===== STUDENTS REPORT =====");
+
+studentsList.forEach(student => {
+
+    console.log("--------------------");
+
+    console.log("ID:", student.id);
+
+    console.log("Name:", student.name);
+
+    console.log("Average:", student.getAverage());
+
+    console.log("Grade:", student.getGrade());
+
+    console.log("Result:", student.getResult());
+
+    console.log("Attendance:", student.attendance);
+
+});
+
+console.log("===== WEAK STUDENTS =====");
+
+console.log(weakStudents);
+
+console.log("===== STUDENTS DATA =====");
+
+console.log(studentsData);
+
+console.log("===== CLASS AVERAGE =====");
+
+console.log(finalAverage);
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <title>Student Management System</title>
+</head>
+<body>
+
+    <h1>Student Management System</h1>
+    <h2>Student Results</h2>
+
+    <script src="index.js"></script>
+
+</body>
+</html>
